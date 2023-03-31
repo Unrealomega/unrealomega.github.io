@@ -55,6 +55,7 @@
         const craftingTime = document.getElementById('crafting-time')
         const craftingCost = document.getElementById('crafting-cost')
         const craftingDays = document.getElementById('crafting-workdays')
+        const craftingPerDays = document.getElementById('crafting-items')
 
         const workerList = document.getElementById("worker-list");
         let totalWorkHours = 0;
@@ -71,9 +72,10 @@
             }
         }
 
-        craftingTime.innerHTML = totalHoursRequired;
-        craftingDays.innerHTML = (totalWorkHours && totalWorkHours > 0 ? totalHoursRequired / totalWorkHours : 'Unknown');
-        craftingCost.innerHTML = totalCost;
+        craftingTime.innerHTML      = totalHoursRequired;
+        craftingDays.innerHTML      = (totalWorkHours && totalWorkHours > 0 ? totalHoursRequired / totalWorkHours : 'Unknown');
+        craftingCost.innerHTML      = totalCost;
+        craftingPerDays.innerHTML   = (totalWorkHours && totalWorkHours > 0 ? totalWorkHours / totalHoursRequired : 'Unknown');
     }
 
     document.getElementById('rate').addEventListener('change', updateTotals);
