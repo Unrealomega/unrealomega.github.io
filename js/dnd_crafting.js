@@ -1,19 +1,21 @@
 "use strict";
 
 ((document) => {
+    //const errorDiv = document.getElementById('error-crafting');
+
     function update() {
-        const workerType = document.getElementById('worker-type');
-        const workerHours = document.getElementById('worker-hours');
+        const workerType = document.getElementById('crafting-worker-type');
+        const workerHours = document.getElementById('crafting-worker-hours');
 
         // Check if hours are possible
         const totalHours = workerHours.value;
 
         if (totalHours < 1 || totalHours > 24) {
-            console.log('Invalid hours');
+            alert('Invalid hours, must be between 0 - 24 hours.');
             return;
         }
 
-        const workerList = document.getElementById("worker-list");
+        const workerList = document.getElementById("crafting-worker-list");
 
         // Create an empty tr
         const row = workerList.insertRow(-1);
@@ -45,9 +47,14 @@
     }
 
     function updateTotals() {
-        const rate = document.getElementById('rate').value;
+        const rate = document.getElementById('crafting-rate').value;
 
-        const costElem = document.getElementById('cost');
+        if (rate < 0.01) {
+            alert('Invalid rate, must be at least 0.01 gp');
+            return;
+        }
+
+        const costElem = document.getElementById('crafting-item-types');
         const cost = costElem.value;
         const canAdept = costElem.options[costElem.selectedIndex].hasAttribute('magic-item-adept');
 
@@ -57,7 +64,7 @@
         const craftingDays = document.getElementById('crafting-workdays')
         const craftingPerDays = document.getElementById('crafting-items')
 
-        const workerList = document.getElementById("worker-list");
+        const workerList = document.getElementById("crafting-worker-list");
         let totalWorkHours = 0;
         let totalCost = cost;
 
@@ -72,16 +79,20 @@
             }
         }
 
+        const craftingTarget = Math.max(1, document.getElementById('crafting-target').value);
+
         craftingTime.innerHTML      = totalHoursRequired;
-        craftingDays.innerHTML      = (totalWorkHours && totalWorkHours > 0 ? totalHoursRequired / totalWorkHours : 'Unknown');
+        craftingDays.innerHTML      = (totalWorkHours && totalWorkHours > 0 ? totalHoursRequired / totalWorkHours * craftingTarget : 'Unknown');
         craftingCost.innerHTML      = totalCost;
         craftingPerDays.innerHTML   = (totalWorkHours && totalWorkHours > 0 ? totalWorkHours / totalHoursRequired : 'Unknown');
     }
 
-    document.getElementById('rate').addEventListener('change', updateTotals);
-    document.getElementById('cost').addEventListener('change', updateTotals);
+    const updatableElems = document.getElementsByClassName('crafting-updatable');
+    for (var i = 0; i < updatableElems.length; ++i) {
+        updatableElems[i].addEventListener('change', updateTotals);;
+    }
 
-    document.getElementById('add-worker-btn').addEventListener('click', update);
+    document.getElementById('crafting-add-worker-btn').addEventListener('click', update);
 
     updateTotals();
 })(document);

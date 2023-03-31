@@ -9,14 +9,23 @@
     </head>
     <body>
         <div id="crafting-tools">
-            <div class="crafting-option">
-                <label for="rate">Work rate (gp/h):</label>
-                <input type="text" id="rate" name="rate" value="5" size="5">
+            <div class="error" id="error-crafting">
+                <span class="error-message"></span>
             </div>
 
             <div class="crafting-option">
-                <label for="cost">Magic Item Type:</label>
-                <select name="cost" id="cost">
+                <label for="crafting-rate">Work rate (gp/h):</label>
+                <input type="number" class="crafting-updatable" id="crafting-rate" name="crafting-rate" value="5" maxlength="2" min="0.01" step="1">
+            </div>
+
+            <div class="crafting-option">
+                <label for="crafting-target">Target Amount (optional):</label>
+                <input type="number" class="crafting-updatable" id="crafting-target" name="crafting-target" value="1" maxlength="2" min="1" step="1">
+            </div>
+
+            <div class="crafting-option">
+                <label for="crafting-item-types">Magic Item Type:</label>
+                <select class="crafting-updatable" name="crafting-item-types" id="crafting-item-types">
                     <option value="100" magic-item-adept>Common (3rd level)</option>
                     <option value="500" magic-item-adept>Uncommon (3rd level)</option>
                     <option value="5000">Rare (6th level)</option>
@@ -26,15 +35,15 @@
             </div>
 
             <div class="crafting-option">
-                <label for="worker-type">Worker:</label>
-                <select name="worker-type" id="worker-type">
+                <label for="crafting-worker-type">Worker:</label>
+                <select name="crafting-worker-type" id="crafting-worker-type">
                     <option value="1">Normal Worker</option>
                     <option value="4">Artificer 10+</option>
                 </select>
 
-                <label for="worker-hours">Total hours per day:</label>
-                <input type="text" id="worker-hours" name="worker-hours" minlength="1" maxlength="2" size="2" value="8">
-                <button id="add-worker-btn" type="button">Add worker</button>
+                <label for="crafting-worker-hours">Total hours per day:</label>
+                <input type="number" id="crafting-worker-hours" name="crafting-worker-hours" minlength="1" maxlength="2" value="8" min="1" max="24" step="1">
+                <button id="crafting-add-worker-btn" type="button">Add worker</button>
             </div>
 
             <div class="crafting-option">
@@ -46,7 +55,7 @@
                             <th>Magic Item Adept</th>
                         </tr>
                     </thead>
-                    <tbody id="worker-list"></tbody>
+                    <tbody id="crafting-worker-list"></tbody>
                 </table>
             </div>
 
@@ -55,7 +64,7 @@
                     <thead>
                         <tr>
                             <th>Crafting time (hr)</th>
-                            <th>Total Work (days)</th>
+                            <th>Work Time (days)</th>
                             <th>Crafting cost (gp)</th>
                             <th>Items/day</th>
                         </tr>
@@ -72,7 +81,6 @@
             </div>
             <strong>Note:</strong> This is using modified DMG rules. If you'd like to use standard DMG cost, change work rate to <strong>3.125</strong>.
         </div>
-
 
         <script src="js/dnd_crafting.js"></script>
     </body>
