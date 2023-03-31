@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Unreal's Tools</title>
+        <link rel="stylesheet" href="css/dnd_crafting.css">
+    </head>
+    <body>
+        <div id="crafting-tools">
+            <div class="crafting-option">
+                <label for="rate">Work rate (gp/h):</label>
+                <input type="text" id="rate" name="rate" value="5" size="5">
+            </div>
+
+            <div class="crafting-option">
+                <label for="cost">Magic Item Type:</label>
+                <select name="cost" id="cost">
+                    <option value="100" magic-item-adept>Common (3rd level)</option>
+                    <option value="500" magic-item-adept>Uncommon (3rd level)</option>
+                    <option value="5000">Rare (6th level)</option>
+                    <option value="50000">Very Rare (11th level)</option>
+                    <option value="500000">Legendary (17th level)</option>
+                </select>
+            </div>
+
+            <div class="crafting-option">
+                <label for="worker-type">Worker:</label>
+                <select name="worker-type" id="worker-type">
+                    <option value="1">Normal Worker</option>
+                    <option value="4">Artificer 10+</option>
+                </select>
+
+                <label for="worker-hours">Total hours per day:</label>
+                <input type="text" id="worker-hours" name="worker-hours" minlength="1" maxlength="2" size="2" value="8">
+                <button id="add-worker-btn" type="button">Add worker</button>
+            </div>
+
+            <div class="crafting-option">
+                <table class="crafting-table" id="worker-table">
+                    <thead>
+                        <tr>
+                            <th>Worker Type</th>
+                            <th>Hours/day</th>
+                            <th>Magic Item Adept</th>
+                        </tr>
+                    </thead>
+                    <tbody id="worker-list"></tbody>
+                </table>
+            </div>
+
+            <div class="crafting-option"></div>
+                <table class="crafting-table" id="crafting-table">
+                    <thead>
+                        <tr>
+                            <th>Crafting time (hr)</th>
+                            <th>Total Work (days)</th>
+                            <th>Crafting cost (gp)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td id="crafting-time"></td>
+                            <td id="crafting-workdays"></td>
+                            <td id="crafting-cost"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        <script src="js/dnd_crafting.js"></script>
+    </body>
+</html>
